@@ -18,11 +18,11 @@ class SendMessage:
     def fill_form(
         self, name: str, email: str, phone: str, subject: str, description: str
     ):
-        self.contact_name.fill(name)
-        self.contact_email.fill(email)
-        self.contact_phone.fill(phone)
-        self.contact_subject.fill(subject)
-        self.contact_description.fill(description)
+        self.contact_name.fill(str(name))
+        self.contact_email.fill(str(email))
+        self.contact_phone.fill(str(phone))
+        self.contact_subject.fill(str(subject))
+        self.contact_description.fill(str(description))
 
     def submit(self):
         self.submit_button.click()
