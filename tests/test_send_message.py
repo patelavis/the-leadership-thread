@@ -1,6 +1,9 @@
 from pages.send_message import SendMessage
 from fixtures.test_data import VALID_CONTACT
 import pandas as pd
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 
 def test_valid_contact_submisstion(page):
@@ -51,14 +54,14 @@ def test_invalid_contact_submisstion(page):
 def test_sync_message_from_excel(page):
 
     df = pd.read_excel("fixtures/inputs.xlsx")
-
-    df["Status"] = None
-    df["Message"] = None
-
-    home = SendMessage(page=page)
+    df["phone"] = df["phone"].astype(str)
+    df["Status"] = ""
+    # df["Message"] = ""
 
     for i, row_data in df.iterrows():
         try:
+            home = SendMessage(page=page)
+
             home.load_page()
 
             home.fill_form(
@@ -75,14 +78,14 @@ def test_sync_message_from_excel(page):
 
             if home.is_success_visiable():
                 df.loc[i, "Status"] = "Pass"
-                df.loc[i, "Message"] = home.get_success_message()
+                # df.loc[i, "Message"] = str(home.get_success_message())
             elif home.is_error_visiable():
                 df.loc[i, "Status"] = "Pass"
-                df.loc[i, "Message"] = home.get_error_message()
+                # df.loc[i, "Message"] = str(home.get_error_message())
             else:
                 df.loc[i, "Status"] = "Fail"
         except Exception as e:
             df.loc[i, "Status"] = "Fail"
-            df.loc[i, "Message"] = str(e)
+            # df.loc[i, "Message"] = str(e)
 
-    df.to_csv("__test_result.csv")
+    logging.info("\n%s", df.to_markdown())

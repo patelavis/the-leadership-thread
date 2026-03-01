@@ -26,4 +26,5 @@ jobs:
           pip install pytest
           playwright install
 
-      - run: pytest
+      # - run: pytest
+      - run: pytest -v --log-cli-level=INFO
