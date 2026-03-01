@@ -144,8 +144,3 @@ project/
 * ✔️ All tests passed
 * ✔️ DataFrame markdown printed in logs (if enabled)
 
----
-* 🔹 README with screenshots
-* 🔹 README formatted specifically for GitHub portfolio
-
-Just tell me 👍
